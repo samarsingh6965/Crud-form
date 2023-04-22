@@ -32,18 +32,8 @@ document.getElementById("submit").addEventListener("click", () => {
 
 
 function getData() {
-    let data = `<table class="table">
-    <thead class="heading">
-        <tr class="heading-row">
-            <th id="serial-number">S NO.</th>
-            <th id="name-head">Name</th>
-            <th id="email-head">Email</th>
-            <th id="phone-number">Phone</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
-    </thead>
-    <tbody class="content">`
+    let data = `
+    `
     for (let i = 0; i < details.length; i++) {
         data = data + `  <tr class="content-row">
         <td id="serial-data">${i+1}</td>
@@ -53,8 +43,7 @@ function getData() {
         <td id="edit-data"><button id="edit-btn" onclick="editData(${i})">Edit</button></td>
         <td id="del-data"><button id="edit-btn" onclick="removeData(${i})">Remove</button></td>
     </tr>`
-        };
-        data = data + `</tbody></table>`  
+        }; 
         document.getElementById('t-body').innerHTML = data
 };
 
