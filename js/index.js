@@ -1,5 +1,5 @@
 let details = [];
-
+// let emailValid = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 function getData(){
     let storage = localStorage.getItem("details");
     if(storage){
@@ -16,12 +16,12 @@ localStorage.setItem("details",JSON.stringify(details));
 
 
 let form = `<div class="container">
-<form class="frm" id="form">
+<div class="frm" id="form">
     <input type="text" placeholder="Enter Your Name" class="Name" id="inp" value=""><br>
     <input type="email" placeholder="Enter Your Email" class="Email" id="inp2" value=""><br>
     <input type="tel" placeholder="Enter Your Number" class="Number" id="inp3" value=""><br>
     <button class="btn" id="submit" onClick="saveData()">Save</button>
-</form>
+</div>
 </div>`;
 
 document.getElementById("form-main").innerHTML = form ;
@@ -37,12 +37,23 @@ const saveData = () => {
         email: email.value,
         phone: phone.value,
     };
-    details.push(data);
-    setData();
 
+if(name.value.length == 0){
+   alert('Enter Your Name')
+}else if(email.value.length == 0){
+    alert('Enter Your Email')
+}else if(phone.value.length ==0){
+    alert('Enter Your Phone')
+}else if(isNaN(phone.value)){
+    alert('Enter a Valid Number')
+}else{
+    details.push(data)
     name.value=''
     email.value=''
     phone.value=''
+}
+
+    setData();
     table()
 };
 
@@ -75,12 +86,12 @@ table()
 
 function editData(index){
 let update = `<div class="container">
-<form action="#" class="frm" id="form">
+<div class="frm" id="form">
     <input type="text" placeholder="Enter Your Name" class="Name" id="newinp" value="${details[index].name}"><br>
     <input type="email" placeholder="Enter Your Email" class="Email" id="newinp2" value="${details[index].email}"><br>
     <input type="tel" placeholder="Enter Your Number" class="Number" id="newinp3" value="${details[index].phone}"><br>
     <button class="btn" id="newsubmit"  onclick="updateData(${index})">Update</button>
-</form>
+</div>
 </div>`
 
 document.getElementById("form-main").innerHTML = update;
@@ -92,7 +103,11 @@ details[index] = {
     email:newinp2.value,
     phone:newinp3.value
 }
-setData()
-table()
-document.getElementById("form-main").innerHTML = form;
+if(isNaN(newinp3.value)){
+    alert('Enter a Valid Number')
+}else{
+    setData()
+    table()
+    document.getElementById("form-main").innerHTML = form;
+}
 }
