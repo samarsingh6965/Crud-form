@@ -1,17 +1,32 @@
 let details = [];
 
+function getData(){
+    let storage = localStorage.getItem("details");
+    if(storage){
+        details = JSON.parse(storage);
+    }else{
+        setData();
+    }
+};
+getData();
+function setData(){
+localStorage.setItem("details",JSON.stringify(details));
+};
+
+
+
 let form = `<div class="container">
-<form action="#" class="frm" id="form">
+<form class="frm" id="form">
     <input type="text" placeholder="Enter Your Name" class="Name" id="inp" value=""><br>
     <input type="email" placeholder="Enter Your Email" class="Email" id="inp2" value=""><br>
     <input type="tel" placeholder="Enter Your Number" class="Number" id="inp3" value=""><br>
-    <button class="btn" id="submit" type="submit">Save</button>
+    <button class="btn" id="submit" onClick="saveData()">Save</button>
 </form>
 </div>`;
 
 document.getElementById("form-main").innerHTML = form ;
 
-document.getElementById("submit").addEventListener("click", () => {
+const saveData = () => {
 
     let name = document.getElementById("inp");
     let email = document.getElementById("inp2");
@@ -23,15 +38,16 @@ document.getElementById("submit").addEventListener("click", () => {
         phone: phone.value,
     };
     details.push(data);
+    setData();
+
     name.value=''
     email.value=''
     phone.value=''
-    getData()
+    table()
+};
 
-});
 
-
-function getData() {
+function table() {
     let data = `
     `
     for (let i = 0; i < details.length; i++) {
@@ -46,10 +62,14 @@ function getData() {
         }; 
         document.getElementById('t-body').innerHTML = data
 };
+table();
+
+
 
 function removeData(index){
-details.splice(index,1)
-getData()
+details.splice(index,1);
+setData()
+table()
 }
 
 
@@ -59,7 +79,7 @@ let update = `<div class="container">
     <input type="text" placeholder="Enter Your Name" class="Name" id="newinp" value="${details[index].name}"><br>
     <input type="email" placeholder="Enter Your Email" class="Email" id="newinp2" value="${details[index].email}"><br>
     <input type="tel" placeholder="Enter Your Number" class="Number" id="newinp3" value="${details[index].phone}"><br>
-    <button class="btn" id="newsubmit" type="submit"  onclick="updateData(${index})">Update</button>
+    <button class="btn" id="newsubmit"  onclick="updateData(${index})">Update</button>
 </form>
 </div>`
 
@@ -72,7 +92,7 @@ details[index] = {
     email:newinp2.value,
     phone:newinp3.value
 }
-getData()
+setData()
+table()
 document.getElementById("form-main").innerHTML = form;
 }
-
