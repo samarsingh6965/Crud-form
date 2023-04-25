@@ -71,7 +71,7 @@ function table() {
         <td id="del-data"><button id="edit-btn" onclick="removeData(${i})">Remove</button></td>
     </tr>`
         }; 
-        document.getElementById('t-body').innerHTML = data
+        document.getElementById('t-body').innerHTML = data;
 };
 table();
 
@@ -93,7 +93,6 @@ let update = `<div class="container">
     <button class="btn" id="newsubmit"  onclick="updateData(${index})">Update</button>
 </div>
 </div>`
-
 document.getElementById("form-main").innerHTML = update;
 }
 
