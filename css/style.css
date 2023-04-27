@@ -22,6 +22,22 @@
     margin-bottom: 50px;
     box-shadow: 1px 1px 10px 5px;
 }
+#switch-button{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background-color: transparent;
+    border: none;
+}
+.switch-on{
+    font-size: 60px!important;
+    color: black;
+    cursor: pointer;
+}
+
+.samar{
+    filter: invert(100%);
+}
 .frm{
     margin-top: 30px;
     padding: 0px 24px;
@@ -82,6 +98,7 @@ table tbody tr td{
 }
 .content-row{
     height: 70px;
+    background-color: white;
 }
 #edit-head{
     width: 10%;
